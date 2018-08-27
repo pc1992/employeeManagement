@@ -17,19 +17,23 @@
  
     <table border="1" cellpadding="5" cellspacing="1" >
        <tr>
-          <th>Code</th>
-          <th>Name</th>
-          <th>Price</th>
-          <th>Edit</th>
-          <th>Delete</th>
+          <th>Username</th>
+          <th>Gender</th>
+          <th>Department</th>
+          <th>Salary</th>
+          <th>Date-Of-Birth</th>
        </tr>
-       <c:forEach items="${productList}" var="product" >
+       <c:forEach items="${user}" var="user" >
           <tr>
-             <td>${product.code}</td>
-             <td>${product.name}</td>
-             <td>${product.price}</td>
+             <td>${user.userName}</td>
+             <td>${user.gender}</td>
+             <td>${user.department}</td>
+             <td>${user.salary}</td>
+             <td>${user.dob}</td>
+          </tr>
+          <tr>
              <td>
-                <a href="editProduct?code=${product.code}">Edit</a>
+                <a href="editProduct?userName=${user.userName}">Edit</a>
              </td>
              <td>
                 <a href="deleteProduct?code=${product.code}">Delete</a>

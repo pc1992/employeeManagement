@@ -17,7 +17,7 @@ public class DBUtils {
     	String encryptedPassword = CryptoUtil.encrypt(password);
     	System.out.println(encryptedPassword);
  
-        String sql = "Select a.userName, a.password, a.clientIp from employee_personal a " //
+        String sql = "Select a.userName, a.password, a.clientIp, a.role from employee_personal a " //
                 + " where a.userName = ? and a.password= ? and a.clientIp= ?";
  
         PreparedStatement pstm = conn.prepareStatement(sql);
@@ -31,6 +31,7 @@ public class DBUtils {
             user.setUserName(userName);
            //Add data members here
             user.setPassword(password);
+            user.setRole(rs.getString(4));
             return user;
         }
         return null;
@@ -47,7 +48,7 @@ public class DBUtils {
         ResultSet rs = pstm.executeQuery();
  
         if (rs.next()) {
-            String password = rs.getString("Password");
+           // String password = rs.getString("Password");
             String gender = rs.getString("Gender");
             Employee user = new Employee();
             user.setUserName(userName);
@@ -58,51 +59,62 @@ public class DBUtils {
         return null;
     }
  
-    public static List<Employee> queryProduct(Connection conn) throws SQLException {
-        String sql = "Select a.Code, a.Name, a.Price from Product a ";
+    public static Employee queryEmployee(Connection conn, String userName) throws SQLException {
+        //String sql = "Select a.Code, a.Name, a.Price from Product a ";
+    	System.out.println(userName);
+    	
+    	String sql = "Select a.userName, a.gender, a.department, a.salary, a.dob from employee a " //
+                + " where a.userName = ?";
  
         PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setString(1, userName);
  
         ResultSet rs = pstm.executeQuery();
-        List<Employee> list = new ArrayList<Employee>();
+       // List<Employee> list = new ArrayList<Employee>();
+        Employee employee = new Employee();
         while (rs.next()) {
-            String code = rs.getString("Code");
-            String name = rs.getString("Name");
-            float price = rs.getFloat("Price");
-            Employee employee = new Employee();
-            //Add Data members here
-            employee.setUserName(name);
+            /*userName = rs.getString("userName");
+            String gender = rs.getString("gender");
+            String department = rs.getString("department");*/
             
-            list.add(employee);
+            //Add Data members here
+        	System.out.println(rs.getString("department"));
+            employee.setUserName(rs.getString("userName"));
+            employee.setDepartment(rs.getString("department"));
+            employee.setGender(rs.getString("gender"));
+            employee.setSalary(rs.getString("salary"));
+            employee.setDob(rs.getString("dob"));
+            
+            //list.add(employee);
         }
-        return list;
+        return employee;
     }
  
-    public static EmployeePersonal findProduct(Connection conn, String code) throws SQLException {
-        String sql = "Select a.Code, a.Name, a.Price from Product a where a.Code=?";
+    public static EmployeePersonal findEmployee(Connection conn, String userName) throws SQLException {
+        String sql = "Select a.userName, a.password from Product a where a.userName=?";
  
         PreparedStatement pstm = conn.prepareStatement(sql);
-        pstm.setString(1, code);
+        pstm.setString(1, userName);
  
         ResultSet rs = pstm.executeQuery();
  
         while (rs.next()) {
-            String name = rs.getString("Name");
-            float price = rs.getFloat("Price");
-            EmployeePersonal product = new EmployeePersonal();//data members here
-            return product;
+            EmployeePersonal employee = new EmployeePersonal();//data members here
+            employee.setUserName(rs.getString("userName"));
+            employee.setPassword(rs.getString("password"));
+            return employee;
         }
         return null;
     }
  
-    public static void updateProduct(Connection conn, EmployeePersonal product) throws SQLException {
-        String sql = "Update Product set Name =?, Price=? where Code=? ";
+    public static void updateProduct(Connection conn, EmployeePersonal employee) throws SQLException {
+        String sql = "Update employee_personal a set a.userName =?, a.password=? where a.userName=? ";
  
         PreparedStatement pstm = conn.prepareStatement(sql);
  
-       /* pstm.setString(1, product.getName());
-        pstm.setFloat(2, product.getPrice());
-        pstm.setString(3, product.getCode());*/
+        pstm.setString(1, employee.getUserName());
+        pstm.setString(2, employee.getUserName());
+        pstm.setString(3, employee.getPassword());
         pstm.executeUpdate();
     }
  

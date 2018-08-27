@@ -11,12 +11,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
- 
+import javax.servlet.http.HttpSession;
+
 import com.employee.mgmt.beans.*;
 import com.employee.mgmt.utils.DBUtils;
 import com.employee.mgmt.utils.MyUtils;
  
-@WebServlet(urlPatterns = { "/productList" })
+@WebServlet(urlPatterns = { "/profile" })
 public class EmployeeDetailsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
  
@@ -28,22 +29,37 @@ public class EmployeeDetailsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Connection conn = MyUtils.getStoredConnection(request);
+        
+        HttpSession session = request.getSession();
+
+        // Check User has logged on
+        EmployeePersonal loginedUser = MyUtils.getLoginedUser(session);
+
+        // Not logged in
+        if (loginedUser == null) {
+            // Redirect to login page.
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
+        // Store info to the request attribute before forwarding.
+        request.setAttribute("user", loginedUser);
+
  
         String errorString = null;
-        List<Employee> list = null;
+        Employee employee = new Employee();
         try {
-            list = DBUtils.queryProduct(conn);
+        	employee = DBUtils.queryEmployee(conn, loginedUser.getUserName());
         } catch (SQLException e) {
             e.printStackTrace();
             errorString = e.getMessage();
         }
         // Store info in request attribute, before forward to views
         request.setAttribute("errorString", errorString);
-        request.setAttribute("productList", list);
+        request.setAttribute("user", employee);
          
         // Forward to /WEB-INF/views/productListView.jsp
         RequestDispatcher dispatcher = request.getServletContext()
-                .getRequestDispatcher("/WEB-INF/views/productListView.jsp");
+                .getRequestDispatcher("/WEB-INF/views/employeeDetailsView.jsp");
         dispatcher.forward(request, response);
     }
  

@@ -48,6 +48,7 @@ public class LoginServlet extends HttpServlet {
         String rememberMeStr = request.getParameter("rememberMe");
         boolean remember = "Y".equals(rememberMeStr);
         String ip = request.getRemoteAddr();
+        System.out.println(ip);
  
         EmployeePersonal user = null;
         boolean hasError = false;
@@ -105,7 +106,14 @@ public class LoginServlet extends HttpServlet {
             }
  
             // Redirect to userInfo page.
-            response.sendRedirect(request.getContextPath() + "/userInfo");
+            System.out.println(user.getRole());
+            if(user.getRole().equals("ADMIN")){
+            	response.sendRedirect(request.getContextPath() + "/adminInfo");
+            }else if(user.getRole().equals("SUPER_EMPLOYEE")){
+            	response.sendRedirect(request.getContextPath() + "/superEmployeeInfo");
+            }else if(user.getRole().equals("EMPLOYEE")){
+            	response.sendRedirect(request.getContextPath() + "/userInfo");
+            }
         }
     }
  

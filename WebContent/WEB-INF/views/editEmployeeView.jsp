@@ -17,24 +17,24 @@
  
       <c:if test="${not empty product}">
          <form method="POST" action="${pageContext.request.contextPath}/editProduct">
-            <input type="hidden" name="code" value="${product.code}" />
+            <input type="hidden" name="userName" value="${user.userName}" />
             <table border="0">
                <tr>
-                  <td>Code</td>
-                  <td style="color:red;">${product.code}</td>
+                  <td>Username</td>
+                  <td style="color:red;">${user.userName}</td>
                </tr>
                <tr>
-                  <td>Name</td>
-                  <td><input type="text" name="name" value="${product.name}" /></td>
+                  <td>Username</td>
+                  <td><input type="text" name="userName" value="${user.userName}" /></td>
                </tr>
                <tr>
-                  <td>Price</td>
-                  <td><input type="text" name="price" value="${product.price}" /></td>
+                  <td>Password</td>
+                  <td><input type="text" name="password" value="${user.password}" /></td>
                </tr>
                <tr>
                   <td colspan = "2">
                       <input type="submit" value="Submit" />
-                      <a href="${pageContext.request.contextPath}/productList">Cancel</a>
+                      <a href="${pageContext.request.contextPath}/profile">Cancel</a>
                   </td>
                </tr>
             </table>

@@ -28,14 +28,14 @@ public class EditEmployeeServlet extends HttpServlet {
             throws ServletException, IOException {
         Connection conn = MyUtils.getStoredConnection(request);
  
-        String code = (String) request.getParameter("code");
+        String userName = (String) request.getParameter("userName");
  
         EmployeePersonal employee = null;
  
         String errorString = null;
  
         try {
-        	employee = DBUtils.findProduct(conn, code);
+        	employee = DBUtils.findEmployee(conn, userName);
         } catch (SQLException e) {
             e.printStackTrace();
             errorString = e.getMessage();
@@ -43,18 +43,18 @@ public class EditEmployeeServlet extends HttpServlet {
  
         // If no error.
         // The product does not exist to edit.
-        // Redirect to productList page.
+        // Redirect to profile page.
         if (errorString != null && employee == null) {
-            response.sendRedirect(request.getServletPath() + "/productList");
+            response.sendRedirect(request.getServletPath() + "/profile");
             return;
         }
  
         // Store errorString in request attribute, before forward to views.
         request.setAttribute("errorString", errorString);
-        request.setAttribute("product", employee);
+        request.setAttribute("user", employee);
  
         RequestDispatcher dispatcher = request.getServletContext()
-                .getRequestDispatcher("/WEB-INF/views/editProductView.jsp");
+                .getRequestDispatcher("/WEB-INF/views/editEmployeeView.jsp");
         dispatcher.forward(request, response);
  
     }
@@ -66,38 +66,36 @@ public class EditEmployeeServlet extends HttpServlet {
             throws ServletException, IOException {
         Connection conn = MyUtils.getStoredConnection(request);
  
-        String code = (String) request.getParameter("code");
-        String name = (String) request.getParameter("name");
-        String priceStr = (String) request.getParameter("price");
-        float price = 0;
-        try {
-            price = Float.parseFloat(priceStr);
-        } catch (Exception e) {
-        }
-        EmployeePersonal product = new EmployeePersonal();//add data members
+        String userName = (String) request.getParameter("userName");
+        String password = (String) request.getParameter("password");
+
+        EmployeePersonal employee = new EmployeePersonal();//add data members
+        String encryptedPassword = CryptoUtil.encrypt(password);
+        employee.setUserName(userName);
+        employee.setPassword(encryptedPassword);
  
         String errorString = null;
  
         try {
-            DBUtils.updateProduct(conn, product);
+            DBUtils.updateProduct(conn, employee);
         } catch (SQLException e) {
             e.printStackTrace();
             errorString = e.getMessage();
         }
         // Store infomation to request attribute, before forward to views.
         request.setAttribute("errorString", errorString);
-        request.setAttribute("product", product);
+        request.setAttribute("user", employee);
  
         // If error, forward to Edit page.
         if (errorString != null) {
             RequestDispatcher dispatcher = request.getServletContext()
-                    .getRequestDispatcher("/WEB-INF/views/editProductView.jsp");
+                    .getRequestDispatcher("/WEB-INF/views/editEmployeeView.jsp");
             dispatcher.forward(request, response);
         }
         // If everything nice.
         // Redirect to the product listing page.
         else {
-            response.sendRedirect(request.getContextPath() + "/productList");
+            response.sendRedirect(request.getContextPath() + "/profile");
         }
     }
  
