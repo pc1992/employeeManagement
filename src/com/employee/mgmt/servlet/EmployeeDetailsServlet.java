@@ -57,7 +57,7 @@ public class EmployeeDetailsServlet extends HttpServlet {
         request.setAttribute("errorString", errorString);
         request.setAttribute("user", employee);
          
-        // Forward to /WEB-INF/views/productListView.jsp
+        // Forward to /WEB-INF/views/employeeDetailsView.jsp
         RequestDispatcher dispatcher = request.getServletContext()
                 .getRequestDispatcher("/WEB-INF/views/employeeDetailsView.jsp");
         dispatcher.forward(request, response);

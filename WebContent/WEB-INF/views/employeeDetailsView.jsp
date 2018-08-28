@@ -4,14 +4,14 @@
 <html>
  <head>
     <meta charset="UTF-8">
-    <title>Product List</title>
+    <title>Employee Details</title>
  </head>
  <body>
  
     <jsp:include page="_header.jsp"></jsp:include>
     <jsp:include page="_menu.jsp"></jsp:include>
  
-    <h3>Product List</h3>
+    <h3>Employee Details</h3>
  
     <p style="color: red;">${errorString}</p>
  
@@ -33,7 +33,7 @@
           </tr>
           <tr>
              <td>
-                <a href="editProduct?userName=${user.userName}">Edit</a>
+                <a href="editEmployee?userName=${user.userName}">Edit</a>
              </td>
              <td>
                 <a href="deleteProduct?code=${product.code}">Delete</a>

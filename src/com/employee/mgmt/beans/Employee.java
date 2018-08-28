@@ -5,17 +5,17 @@ public class Employee {
 	 public static final String GENDER_MALE ="M";
 	   public static final String GENDER_FEMALE = "F";
 	   
-	   private Long id;
+	   private String id;
 	   private String userName;
 	   private String gender;
 	   private String department;
 	   private String salary;
 	   private String dob;
 	   
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getUserName() {

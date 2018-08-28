@@ -15,9 +15,9 @@
  
       <p style="color: red;">${errorString}</p>
  
-      <c:if test="${not empty product}">
-         <form method="POST" action="${pageContext.request.contextPath}/editProduct">
-            <input type="hidden" name="userName" value="${user.userName}" />
+      <c:if test="${not empty user}">
+         <form method="POST" action="${pageContext.request.contextPath}/editEmployee">
+            <input type="hidden" name="id" value="${user.id}" />
             <table border="0">
                <tr>
                   <td>Username</td>

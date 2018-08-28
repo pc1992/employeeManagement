@@ -72,6 +72,7 @@ public class DBUtils {
         ResultSet rs = pstm.executeQuery();
        // List<Employee> list = new ArrayList<Employee>();
         Employee employee = new Employee();
+        System.out.println("Before whileLoop");
         while (rs.next()) {
             /*userName = rs.getString("userName");
             String gender = rs.getString("gender");
@@ -87,11 +88,12 @@ public class DBUtils {
             
             //list.add(employee);
         }
+        System.out.println("Afer whileLoop");
         return employee;
     }
  
     public static EmployeePersonal findEmployee(Connection conn, String userName) throws SQLException {
-        String sql = "Select a.userName, a.password from Product a where a.userName=?";
+        String sql = "Select a.userName, a.password, a.id from employee_personal a where a.userName=?";
  
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setString(1, userName);
@@ -101,21 +103,27 @@ public class DBUtils {
         while (rs.next()) {
             EmployeePersonal employee = new EmployeePersonal();//data members here
             employee.setUserName(rs.getString("userName"));
-            employee.setPassword(rs.getString("password"));
+            employee.setPassword(CryptoUtil.decrypt(rs.getString("password")));
+            employee.setId(rs.getString("id"));
             return employee;
         }
         return null;
     }
  
     public static void updateProduct(Connection conn, EmployeePersonal employee) throws SQLException {
-        String sql = "Update employee_personal a set a.userName =?, a.password=? where a.userName=? ";
+        String sql = "Update employee_personal a set a.userName =?, a.password=? where a.id=? ";
+        String sqlEmp = "Update employee a set a.userName =? where a.id=? ";
  
         PreparedStatement pstm = conn.prepareStatement(sql);
+        PreparedStatement pstmEmp = conn.prepareStatement(sqlEmp);
  
+        pstm.setString(3, employee.getId());
         pstm.setString(1, employee.getUserName());
-        pstm.setString(2, employee.getUserName());
-        pstm.setString(3, employee.getPassword());
+        pstm.setString(2, employee.getPassword());
+        pstmEmp.setString(1, employee.getUserName());
+        pstmEmp.setString(2, employee.getId());
         pstm.executeUpdate();
+        pstmEmp.executeUpdate();
     }
  
     public static void insertEmployee(Connection conn, Employee employee) throws SQLException {

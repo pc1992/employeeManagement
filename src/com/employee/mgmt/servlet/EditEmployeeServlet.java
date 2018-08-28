@@ -22,7 +22,7 @@ public class EditEmployeeServlet extends HttpServlet {
         super();
     }
  
-    // Show product edit page.
+    // Show employee edit page.
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -42,7 +42,7 @@ public class EditEmployeeServlet extends HttpServlet {
         }
  
         // If no error.
-        // The product does not exist to edit.
+        // The employee does not exist to edit.
         // Redirect to profile page.
         if (errorString != null && employee == null) {
             response.sendRedirect(request.getServletPath() + "/profile");
@@ -68,23 +68,29 @@ public class EditEmployeeServlet extends HttpServlet {
  
         String userName = (String) request.getParameter("userName");
         String password = (String) request.getParameter("password");
+        String id = (String) request.getParameter("id");
+        System.out.println(id+"Id is");
 
         EmployeePersonal employee = new EmployeePersonal();//add data members
+        Employee employeeDetails = new Employee();
         String encryptedPassword = CryptoUtil.encrypt(password);
         employee.setUserName(userName);
         employee.setPassword(encryptedPassword);
+        employee.setId(id);
+        System.out.println(employee.getPassword());
  
         String errorString = null;
  
         try {
             DBUtils.updateProduct(conn, employee);
+            employeeDetails = DBUtils.queryEmployee(conn, userName);
         } catch (SQLException e) {
             e.printStackTrace();
             errorString = e.getMessage();
         }
         // Store infomation to request attribute, before forward to views.
         request.setAttribute("errorString", errorString);
-        request.setAttribute("user", employee);
+        request.setAttribute("user", employeeDetails);
  
         // If error, forward to Edit page.
         if (errorString != null) {
@@ -93,7 +99,7 @@ public class EditEmployeeServlet extends HttpServlet {
             dispatcher.forward(request, response);
         }
         // If everything nice.
-        // Redirect to the product listing page.
+        // Redirect to the profile page.
         else {
             response.sendRedirect(request.getContextPath() + "/profile");
         }
