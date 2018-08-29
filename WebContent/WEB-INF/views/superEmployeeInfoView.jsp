@@ -14,8 +14,8 @@
     <h3>Hello Super EMP: ${user.userName}</h3>
  
     User Name: <b>${user.userName}</b>
-<%--     <br />
-    Gender: ${user.gender } <br /> --%>
+<a href="${pageContext.request.contextPath}/profile">Profile</a>
+<a href="${pageContext.request.contextPath}/list">Employees' List</a>
  
     <jsp:include page="_footer.jsp"></jsp:include>
  

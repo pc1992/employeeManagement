@@ -4,14 +4,14 @@
 <html>
  <head>
     <meta charset="UTF-8">
-    <title>Employee Details</title>
+    <title>Employee Details List</title>
  </head>
  <body>
  
     <jsp:include page="_header.jsp"></jsp:include>
     <jsp:include page="_menu.jsp"></jsp:include>
  
-    <h3>Employee Details</h3>
+    <h3>Employee Details List</h3>
  
     <p style="color: red;">${errorString}</p>
  
@@ -22,19 +22,20 @@
           <th>Department</th>
           <th>Salary</th>
           <th>Date-Of-Birth</th>
+          <th>Action</th>
        </tr>
-       <c:forEach items="${user}" var="user" >
+       <c:forEach items="${empList}" var="user">
           <tr>
-             <td>${user.userName}</td>
+             <td><c:out value="${user.userName}"/></td>
              <td>${user.gender}</td>
              <td>${user.department}</td>
              <td>${user.salary}</td>
              <td>${user.dob}</td>
+             <td>
+                <a href="editEmployeeDetails?userName=${user.userName}">Edit</a>
+             </td>
           </tr>
           <tr>
-             <td>
-                <a href="editEmployee?userName=${user.userName}">Edit</a>
-             </td>
           </tr>
        </c:forEach>
     </table>

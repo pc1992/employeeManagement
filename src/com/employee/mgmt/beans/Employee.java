@@ -11,6 +11,7 @@ public class Employee {
 	   private String department;
 	   private String salary;
 	   private String dob;
+	   private String role;
 	   
 	public String getId() {
 		return id;
@@ -47,6 +48,12 @@ public class Employee {
 	}
 	public void setDob(String dob) {
 		this.dob = dob;
+	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 }

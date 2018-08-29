@@ -37,10 +37,10 @@ public class DBUtils {
         return null;
     }
  
-    public static Employee findUser(Connection conn, String userName) throws SQLException {
+    public static Employee findEmployeeForEdit(Connection conn, String userName) throws SQLException {
  
-        String sql = "Select a.User_Name, a.Password, a.Gender from User_Account a "//
-                + " where a.User_Name = ? ";
+        String sql = "Select a.userName, a.gender, a.department, a.salary, a.dob from employee a "//
+                + " where a.userName = ? ";
  
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setString(1, userName);
@@ -48,48 +48,62 @@ public class DBUtils {
         ResultSet rs = pstm.executeQuery();
  
         if (rs.next()) {
-           // String password = rs.getString("Password");
-            String gender = rs.getString("Gender");
-            Employee user = new Employee();
-            user.setUserName(userName);
-            //Add data members here
-            user.setGender(gender);
-            return user;
+            Employee employee = new Employee();
+            employee.setUserName(rs.getString("userName"));
+            employee.setDepartment(rs.getString("department"));
+            employee.setGender(rs.getString("gender"));
+            employee.setSalary(rs.getString("salary"));
+            employee.setDob(rs.getString("dob"));
+            return employee;
         }
         return null;
     }
  
     public static Employee queryEmployee(Connection conn, String userName) throws SQLException {
-        //String sql = "Select a.Code, a.Name, a.Price from Product a ";
     	System.out.println(userName);
     	
-    	String sql = "Select a.userName, a.gender, a.department, a.salary, a.dob from employee a " //
+    	String sql = "Select a.userName, a.gender, a.department, a.salary, a.dob, a.id from employee a " //
                 + " where a.userName = ?";
  
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setString(1, userName);
  
         ResultSet rs = pstm.executeQuery();
-       // List<Employee> list = new ArrayList<Employee>();
         Employee employee = new Employee();
         System.out.println("Before whileLoop");
         while (rs.next()) {
-            /*userName = rs.getString("userName");
-            String gender = rs.getString("gender");
-            String department = rs.getString("department");*/
-            
-            //Add Data members here
         	System.out.println(rs.getString("department"));
             employee.setUserName(rs.getString("userName"));
             employee.setDepartment(rs.getString("department"));
             employee.setGender(rs.getString("gender"));
             employee.setSalary(rs.getString("salary"));
             employee.setDob(rs.getString("dob"));
-            
-            //list.add(employee);
+            employee.setId(rs.getString("id"));
         }
         System.out.println("Afer whileLoop");
         return employee;
+    }
+    
+    public static List<Employee> queryEmployee(Connection conn) throws SQLException {
+        String sql = "Select a.userName, a.gender, a.department, a.salary, a.dob from employee a " //
+                + " where a.role = ?";
+ 
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setString(1, "EMPLOYEE");
+ 
+        ResultSet rs = pstm.executeQuery();
+        List<Employee> list = new ArrayList<Employee>();
+        while (rs.next()) {
+            Employee employee = new Employee();
+            System.out.println(rs.getString("department"));
+            employee.setUserName(rs.getString("userName"));
+            employee.setDepartment(rs.getString("department"));
+            employee.setGender(rs.getString("gender"));
+            employee.setSalary(rs.getString("salary"));
+            employee.setDob(rs.getString("dob"));
+            list.add(employee);
+        }
+        return list;
     }
  
     public static EmployeePersonal findEmployee(Connection conn, String userName) throws SQLException {
@@ -110,7 +124,7 @@ public class DBUtils {
         return null;
     }
  
-    public static void updateProduct(Connection conn, EmployeePersonal employee) throws SQLException {
+    public static void updateEmployee(Connection conn, EmployeePersonal employee) throws SQLException {
         String sql = "Update employee_personal a set a.userName =?, a.password=? where a.id=? ";
         String sqlEmp = "Update employee a set a.userName =? where a.id=? ";
  
@@ -124,6 +138,21 @@ public class DBUtils {
         pstmEmp.setString(2, employee.getId());
         pstm.executeUpdate();
         pstmEmp.executeUpdate();
+    }
+    
+    public static void updateEmployeeDetails(Connection conn, Employee employee) throws SQLException {
+        String sql = "Update employee a set a.gender=?, a.department=?, a.salary=?, a.dob=? where a.userName=? ";
+ 
+        PreparedStatement pstm = conn.prepareStatement(sql);
+ 
+        pstm.setString(6, employee.getUserName());
+        pstm.setString(1, employee.getId());
+        pstm.setString(2, employee.getGender());
+        pstm.setString(3, employee.getDepartment());
+        pstm.setString(4, employee.getSalary());
+        pstm.setString(5, employee.getDob());
+        pstm.executeUpdate();
+
     }
  
     public static void insertEmployee(Connection conn, Employee employee) throws SQLException {
