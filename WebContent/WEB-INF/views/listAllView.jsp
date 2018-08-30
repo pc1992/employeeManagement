@@ -34,6 +34,9 @@
              <td>
                 <a href="editEmployeeDetails?userName=${user.userName}">Edit</a>
              </td>
+              <td>
+                <a href="deleteEmployee?userName=${user.userName}">Delete</a>
+             </td>
           </tr>
           <tr>
           </tr>

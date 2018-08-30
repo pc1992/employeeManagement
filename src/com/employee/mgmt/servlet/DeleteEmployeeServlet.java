@@ -28,12 +28,12 @@ public class DeleteEmployeeServlet extends HttpServlet {
            throws ServletException, IOException {
        Connection conn = MyUtils.getStoredConnection(request);
 
-       String code = (String) request.getParameter("code");
+       String id = (String) request.getParameter("id");
 
        String errorString = null;
 
        try {
-           DBUtils.deleteProduct(conn, code);
+           DBUtils.deleteProduct(conn, id);
        } catch (SQLException e) {
            e.printStackTrace();
            errorString = e.getMessage();
@@ -51,7 +51,7 @@ public class DeleteEmployeeServlet extends HttpServlet {
        // If everything nice.
        // Redirect to the product listing page.        
        else {
-           response.sendRedirect(request.getContextPath() + "/productList");
+           response.sendRedirect(request.getContextPath() + "/listAll");
        }
 
    }

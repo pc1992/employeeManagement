@@ -123,6 +123,29 @@ public class DBUtils {
         }
         return null;
     }
+    
+    public static List<Employee> findAll(Connection conn) throws SQLException {
+    	String sql = "Select a.userName, a.gender, a.department, a.salary, a.dob, a.id from employee a "; //
+                
+        PreparedStatement pstm = conn.prepareStatement(sql);
+ 
+        ResultSet rs = pstm.executeQuery();
+        List<Employee> list = new ArrayList<Employee>();
+        System.out.println("Before whileLoop");
+        while (rs.next()) {
+        	Employee employee = new Employee();
+        	System.out.println(rs.getString("department"));
+            employee.setUserName(rs.getString("userName"));
+            employee.setDepartment(rs.getString("department"));
+            employee.setGender(rs.getString("gender"));
+            employee.setSalary(rs.getString("salary"));
+            employee.setDob(rs.getString("dob"));
+            employee.setId(rs.getString("id"));
+            list.add(employee);
+        }
+        System.out.println("Afer whileLoop");
+        return list;
+    }
  
     public static void updateEmployee(Connection conn, EmployeePersonal employee) throws SQLException {
         String sql = "Update employee_personal a set a.userName =?, a.password=? where a.id=? ";
@@ -167,14 +190,21 @@ public class DBUtils {
         pstm.executeUpdate();
     }
  
-    public static void deleteProduct(Connection conn, String code) throws SQLException {
-        String sql = "Delete From Product where Code= ?";
+    public static void deleteProduct(Connection conn, String id) throws SQLException {
+        //String sql = "Delete From Product where Code= ?";
+        String delSql = "Update employee a set a.dFlag=? where a.id=? ";
+        String delSqlEmp = "Update employee_personal a set a.dFlag=? where a.id=? ";
  
-        PreparedStatement pstm = conn.prepareStatement(sql);
- 
-        pstm.setString(1, code);
+        PreparedStatement pstm = conn.prepareStatement(delSql);
+        PreparedStatement pstmEmp = conn.prepareStatement(delSqlEmp);
+        pstm.setString(1, "D");
+        pstm.setString(2, id);
+        pstmEmp.setString(1, "D");
+        pstmEmp.setString(2, id);
+        
  
         pstm.executeUpdate();
+        pstmEmp.executeUpdate();
     }
  
 }

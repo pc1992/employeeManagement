@@ -4,7 +4,7 @@
 <html>
  <head>
     <meta charset="UTF-8">
-    <title>Delete Product</title>
+    <title>Delete Employee</title>
  </head>
  
  <body>
@@ -12,10 +12,10 @@
     <jsp:include page="_header.jsp"></jsp:include>
     <jsp:include page="_menu.jsp"></jsp:include>
     
-    <h3>Delete Product</h3>
+    <h3>Delete Employee</h3>
     
     <p style="color: red;">${errorString}</p>
-    <a href="productList">Product List</a>
+    <a href="listAll">Employees' List</a>
     
     <jsp:include page="_footer.jsp"></jsp:include>
     
