@@ -33,7 +33,7 @@ public class DeleteEmployeeServlet extends HttpServlet {
        String errorString = null;
 
        try {
-           DBUtils.deleteProduct(conn, id);
+           DBUtils.deleteEmployee(conn, id);
        } catch (SQLException e) {
            e.printStackTrace();
            errorString = e.getMessage();

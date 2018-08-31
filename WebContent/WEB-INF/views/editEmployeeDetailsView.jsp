@@ -13,18 +13,20 @@
       <jsp:include page="_header.jsp"></jsp:include>
       <jsp:include page="_menu.jsp"></jsp:include>
  
-      <h3>Edit Employee Details</h3>
+      <h1 class="page-header">Edit Employee Details</h1>
  
       <p style="color: red;">${errorString}</p>
  
       <c:if test="${not empty user}">
          <form method="POST" action="${pageContext.request.contextPath}/editEmployee">
             <input type="hidden" name="id" value="${user.id}" />
-            <table border="0">
-               <tr>
+            <table border="0" class="table table-striped table-bordered table-hover table-condensed">
+        <div class="form-group">
+               <tr class="warning">
                   <td>Username</td>
-                  <td style="color:red;">${user.userName}</td>
+                  <td>${user.userName}</td>
                </tr>
+               </div>
                  <tr>
                   <td>ID</td>
                   <td><input type="text" name="id" value="${user.id}" /></td>
@@ -51,8 +53,8 @@
                </tr>
                <tr>
                   <td colspan = "2">
-                      <input type="submit" value="Submit" />
-                      <a href="${pageContext.request.contextPath}/list">Cancel</a>
+                      <button type="submit" class="btn btn-warning">Submit</button>
+                <a href="${pageContext.request.contextPath}/list" class="btn btn-danger" role="button">Cancel</a>
                   </td>
                </tr>
             </table>

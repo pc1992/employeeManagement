@@ -12,13 +12,22 @@
 
     <jsp:include page="_header.jsp"></jsp:include>
     <jsp:include page="_menu.jsp"></jsp:include>
- 
-    <h3>Hello I am Admin: ${user.userName}</h3>
- 
+ <div>
+    <h1 class="page-header">Hello I am Admin: ${user.userName}</h1>
+ </div>
+ <div>
     User Name: <b>${user.userName}</b>
-<a href="${pageContext.request.contextPath}/profile">Profile</a>
-<a href="${pageContext.request.contextPath}/listAll">Employees' List</a>
- 
+ </div>
+  <div>   
+        <ul class="list-inline">
+        <li> <div>
+    <a href="${pageContext.request.contextPath}/profile" class="btn btn-success" role="button">Profile</a>
+ </div></li>
+        <li> <div>
+    <a href="${pageContext.request.contextPath}/listAll" class="btn btn-success" role="button">Employees' List</a>
+ </div></li>
+      </ul>
+</div>
     <jsp:include page="_footer.jsp"></jsp:include>
  
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

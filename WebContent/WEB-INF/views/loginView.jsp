@@ -32,35 +32,11 @@
                 <label>
                   <input type="checkbox" value= "Y" name="rememberMe"> Remember me
                 </label>
-                <button type="submit" class="btn btn-default">Login</button>
-                <a href="${pageContext.request.contextPath}/" class="btn btn-success" role="button">Cancel</a>
+                <button type="submit" class="btn btn-success">Login</button>
+                <a href="${pageContext.request.contextPath}/" class="btn btn-danger" role="button">Cancel</a>
               </form>
       </div>
-
-      <form method="POST" action="${pageContext.request.contextPath}/login">
-         <table border="0">
-            <tr>
-               <td>User Name</td>
-               <td><input type="text" name="userName" value= "${user.userName}" /> </td>
-            </tr>
-            <tr>
-               <td>Password</td>
-               <td><input type="text" name="password" value= "${user.password}" /> </td>
-            </tr>
-            <tr>
-               <td>Remember me</td>
-               <td><input type="checkbox" name="rememberMe" value= "Y" /> </td>
-            </tr>
-            <tr>
-               <td colspan ="2">
-                  <input type="submit" value= "Submit" />
-                  <a href="${pageContext.request.contextPath}/" class="btn btn-success" role="button">Cancel</a>
-               </td>
-            </tr>
-         </table>
-      </form>
- 
-      <p style="color:blue;">Employee Name: tom, password: tom001 or jerry/jerry001</p>
+      <p style="color:blue;">Employee Name: user1, password: user1 or jerry/jerry001</p>
  
       <jsp:include page="_footer.jsp"></jsp:include>
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

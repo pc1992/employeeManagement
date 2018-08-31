@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
  
 import com.employee.mgmt.beans.*;
+
+import oracle.net.aso.p;
  
 public class DBUtils {
  
@@ -179,19 +181,24 @@ public class DBUtils {
     }
  
     public static void insertEmployee(Connection conn, Employee employee) throws SQLException {
-        String sql = "Insert into Product(Code, Name,Price) values (?,?,?)";
+        String sql = "Insert into employee(id, userName,gender,department,salary,dob,role) values (?,?,?,?,?,?,?)";
  
         PreparedStatement pstm = conn.prepareStatement(sql);
- /*
-        pstm.setString(1, product.getCode());
-        pstm.setString(2, product.getName());
-        pstm.setFloat(3, product.getPrice());*/
+ 
+        pstm.setString(1, employee.getId());
+        pstm.setString(2, employee.getUserName());
+        pstm.setString(3, employee.getGender());
+        pstm.setString(4, employee.getDepartment());
+        pstm.setString(5, employee.getSalary());
+        pstm.setString(6, employee.getDob());
+        pstm.setString(7, employee.getRole());
+        
  
         pstm.executeUpdate();
     }
  
-    public static void deleteProduct(Connection conn, String id) throws SQLException {
-        //String sql = "Delete From Product where Code= ?";
+    public static void deleteEmployee(Connection conn, String id) throws SQLException {
+        
         String delSql = "Update employee a set a.dFlag=? where a.id=? ";
         String delSqlEmp = "Update employee_personal a set a.dFlag=? where a.id=? ";
  

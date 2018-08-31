@@ -9,13 +9,7 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
   <body>
-    <div class="jumbotron text-center">
-      <div class="container">
-        <h1>Welcome To EMP Portal</h1>
-        <p>Enter website related/slogan here..</p>
-        <a href="#" class="btn btn-primary">Read More</a>
-      </div>
-    </div>
+    
  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

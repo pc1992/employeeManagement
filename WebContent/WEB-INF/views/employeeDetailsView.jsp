@@ -13,17 +13,18 @@
     <jsp:include page="_header.jsp"></jsp:include>
     <jsp:include page="_menu.jsp"></jsp:include>
  
-    <h3>Employee Details</h3>
+    <h1 class="page-header">Employee Details</h1>
  
     <p style="color: red;">${errorString}</p>
  
-    <table border="1" cellpadding="5" cellspacing="1" >
+    <table border="1" cellpadding="5" cellspacing="1" class="table table-striped table-bordered table-hover table-condensed">
        <tr>
           <th>Username</th>
           <th>Gender</th>
           <th>Department</th>
           <th>Salary</th>
           <th>Date-Of-Birth</th>
+          <th>Action</th>
        </tr>
        <c:forEach items="${user}" var="user" >
           <tr>
@@ -32,16 +33,12 @@
              <td>${user.department}</td>
              <td>${user.salary}</td>
              <td>${user.dob}</td>
-          </tr>
-          <tr>
              <td>
-                <a href="editEmployee?userName=${user.userName}">Edit</a>
+                <a href="editEmployee?userName=${user.userName}" class="btn btn-info">Edit</a>
              </td>
           </tr>
        </c:forEach>
     </table>
- 
-    <a href="createProduct" >Create Product</a>
  
     <jsp:include page="_footer.jsp"></jsp:include>
  

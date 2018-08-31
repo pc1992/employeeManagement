@@ -43,14 +43,16 @@
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
         </nav>
+        <div class="jumbotron text-center">
+      <div class="container">
+        <h1>Welcome To EMP Portal</h1>
+        <p>Enter website related/slogan here..</p>
+        <a href="#" class="btn btn-primary">Read More</a>
+      </div>
+    </div>
     
-<div style="padding: 5px;">
- 
-   <a href="${pageContext.request.contextPath}/" class="btn btn-primary" role="button">Home</a>
-   
-   <a href="${pageContext.request.contextPath}/login" class="btn btn-success" role="button">Login</a>
     
-</div>
+
  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

@@ -13,28 +13,44 @@
       <jsp:include page="_header.jsp"></jsp:include>
       <jsp:include page="_menu.jsp"></jsp:include>
        
-      <h3>Create Product</h3>
+      <h1 class="page-header">Create Employee</h1>
        
       <p style="color: red;">${errorString}</p>
        
-      <form method="POST" action="${pageContext.request.contextPath}/createProduct">
-         <table border="0">
+      <form method="POST" action="${pageContext.request.contextPath}/createEmployee">
+         <table border="0"class="table table-striped table-bordered table-hover table-condensed">
             <tr>
-               <td>Code</td>
-               <td><input type="text" name="code" value="${product.code}" /></td>
+               <td>Id</td>
+               <td><input type="text" name="id" value="${employee.id}" /></td>
             </tr>
             <tr>
-               <td>Name</td>
-               <td><input type="text" name="name" value="${product.name}" /></td>
+               <td>User Name</td>
+               <td><input type="text" name="userName" value="${employee.userName}" /></td>
             </tr>
             <tr>
-               <td>Price</td>
-               <td><input type="text" name="price" value="${product.price}" /></td>
+               <td>Gender</td>
+               <td><input type="text" name="gender" value="${employee.gender}" /></td>
+            </tr>
+            <tr>
+               <td>Department</td>
+               <td><input type="text" name="department" value="${employee.department}" /></td>
+            </tr>
+            <tr>
+               <td>Salary</td>
+               <td><input type="text" name="salary" value="${employee.salary}" /></td>
+            </tr>
+            <tr>
+               <td>Date-of-Birth</td>
+               <td><input type="text" name="dob" value="${employee.dob}" /></td>
+            </tr>
+            <tr>
+               <td>Role</td>
+               <td><input type="text" name="role" value="${employee.role}" /></td>
             </tr>
             <tr>
                <td colspan="2">                   
-                   <input type="submit" value="Submit" />
-                   <a href="productList">Cancel</a>
+                   <input type="submit" value="Submit" class="btn btn-success" />
+                   <a href="listAll" class="btn btn-danger" role="button">Cancel</a>
                </td>
             </tr>
          </table>

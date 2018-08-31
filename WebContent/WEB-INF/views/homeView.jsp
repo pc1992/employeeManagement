@@ -12,8 +12,16 @@
  
      <jsp:include page="_header.jsp"></jsp:include>
      <jsp:include page="_menu.jsp"></jsp:include>
-    
+     
       <h1 class="page-header">Home Page</h1>
+      
+      <div style="padding: 5px;">
+ 
+   <a href="${pageContext.request.contextPath}/" class="btn btn-primary" role="button">Home</a>
+   
+   <a href="${pageContext.request.contextPath}/login" class="btn btn-success" role="button">Login</a>
+    
+</div>
  
      <jsp:include page="_footer.jsp"></jsp:include>
  

@@ -13,36 +13,37 @@
       <jsp:include page="_header.jsp"></jsp:include>
       <jsp:include page="_menu.jsp"></jsp:include>
  
-      <h3>Edit Employee</h3>
+      <h1 class="page-header">Edit Employee</h1>
  
       <p style="color: red;">${errorString}</p>
  
       <c:if test="${not empty user}">
          <form method="POST" action="${pageContext.request.contextPath}/editEmployee">
             <input type="hidden" name="id" value="${user.id}" />
-            <table border="0">
-               <tr>
+            <table border="0" class="table table-striped table-bordered table-hover table-condensed">
+              <div class="form-group">
+               <tr class="success">
                   <td>Username</td>
-                  <td style="color:red;">${user.userName}</td>
+                  <td>${user.userName}</td>
                </tr>
-               <tr>
-                  <td>Username</td>
-                  <td><input type="text" name="userName" value="${user.userName}" /></td>
-               </tr>
-               <tr>
-                  <td>Password</td>
-                  <td><input type="text" name="password" value="${user.password}" /></td>
-               </tr>
+               </div>
+           <div class="form-group">
+          <label>User Name</label>
+          <input type="text" class="form-control" placeholder="Add Name" name="userName" value="${user.userName}">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="text" class="form-control" placeholder="Add Password" name="password" value="${user.password}" >
+        </div>
                <tr>
                   <td colspan = "2">
-                      <input type="submit" value="Submit" />
-                      <a href="${pageContext.request.contextPath}/profile">Cancel</a>
+                <button type="submit" class="btn btn-success">Submit</button>
+                <a href="${pageContext.request.contextPath}/profile" class="btn btn-danger" role="button">Cancel</a>
                   </td>
                </tr>
             </table>
          </form>
       </c:if>
- 
       <jsp:include page="_footer.jsp"></jsp:include>
  
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

@@ -13,13 +13,14 @@
  
     <jsp:include page="_header.jsp"></jsp:include>
     <jsp:include page="_menu.jsp"></jsp:include>
- 
-    <h3>Hello: ${user.userName}</h3>
- 
+ <div>
+    <h1 class="page-header">Hello: ${user.userName}</h1>
+ </div>
+<div>
     User Name: <b>${user.userName}</b>
-
-    <a href="${pageContext.request.contextPath}/profile">Profile</a>
- 
+</div><div>
+    <a href="${pageContext.request.contextPath}/profile" class="btn btn-primary" role="button">Profile</a>
+ </div>
     <jsp:include page="_footer.jsp"></jsp:include>
  
  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
